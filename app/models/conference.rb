@@ -216,11 +216,12 @@ class Conference < ActiveRecord::Base
         registration_period.start_date &&
         registration_period.end_date
 
-      reg = registrations.group(:week).count
-      start_week = get_registration_start_week
-      weeks = registration_weeks
 
-      calculate_items_per_week(start_week, weeks, reg)
+      calculate_items_per_week(
+        registrations.group(:week).count,
+        get_registration_start_week,
+        registration_weeks
+      )
     else
       []
     end
