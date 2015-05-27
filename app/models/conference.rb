@@ -216,7 +216,6 @@ class Conference < ActiveRecord::Base
         registration_period.start_date &&
         registration_period.end_date
 
-
       calculate_items_per_week(
         registrations.group(:week).count,
         get_registration_start_week,
@@ -971,8 +970,7 @@ class Conference < ActiveRecord::Base
     last_key = start_week - 1
 
     if !items.empty? && start_week > items.keys[0].to_i
-      start_week = items.keys[0].to_i
-      weeks += start_week - items.keys[0].to_i + 1
+      weeks += 1
     end
 
     items.each do |key, value|
