@@ -168,10 +168,11 @@ class Conference < ActiveRecord::Base
   #  * +Array+ -> e.g. [0, 3, 3, 5] -> first week 0 events, second week 3 events.
   def get_submissions_per_week
     if call_for_paper && events
-      submissions = events.group(:week).count
-      start_week = call_for_paper.start_week
-      weeks = call_for_paper.weeks
-      calculate_items_per_week(start_week, weeks, submissions)
+      calculate_items_per_week(
+        events.group(:week).count,
+        call_for_paper.start_week,
+        call_for_paper.weeks
+      )
     else
       []
     end
