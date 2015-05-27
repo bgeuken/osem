@@ -211,8 +211,6 @@ class Conference < ActiveRecord::Base
   # ====Returns
   #  * +Array+ -> e.g. [0, 3, 3, 5] -> first week 0, second week 3 registrations
   def get_registrations_per_week
-    result = []
-
     if registrations &&
         registration_period &&
         registration_period.start_date &&
@@ -221,9 +219,11 @@ class Conference < ActiveRecord::Base
       reg = registrations.group(:week).count
       start_week = get_registration_start_week
       weeks = registration_weeks
-      result = calculate_items_per_week(start_week, weeks, reg)
+
+      calculate_items_per_week(start_week, weeks, reg)
+    else
+      []
     end
-    result
   end
 
   ##
