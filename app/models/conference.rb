@@ -167,15 +167,14 @@ class Conference < ActiveRecord::Base
   # ====Returns
   #  * +Array+ -> e.g. [0, 3, 3, 5] -> first week 0 events, second week 3 events.
   def get_submissions_per_week
-    result = []
-
     if call_for_paper && events
       submissions = events.group(:week).count
       start_week = call_for_paper.start_week
       weeks = call_for_paper.weeks
-      result = calculate_items_per_week(start_week, weeks, submissions)
+      calculate_items_per_week(start_week, weeks, submissions)
+    else
+      []
     end
-    result
   end
 
   ##
