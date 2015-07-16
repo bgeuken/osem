@@ -960,16 +960,32 @@ class Conference < ActiveRecord::Base
       ).sample
   end
 
+  def _calculate_items_per_week(start_week, weeks)
+    # sort weeks by date
+    # iterate through them
+    # split by weeks
+    # count
+    # cumulate (extra method)
+  end
+
   # Calculates items per week from a hash.
   #
   # ====Returns
   #  * +Array+ -> e.g. [1, 3, 3, 5] -> first week 1, second week 2 registrations
-  def calculate_items_per_week(start_week, weeks, items)
+  def calculate_items_per_week(counted_weeks, weeks, items)
+# start_week: number of weeks
+# weeks: first week
+# items: array of weeks
+
+# take an array of weeks
+# calculates registrations per week
+# returns an array with result (=cumulated weekly registrations)
+
     sum = 0
     result = []
-    last_key = start_week - 1
+    last_key = counted_weeks - 1
 
-    if !items.empty? && start_week > items.keys[0].to_i
+    if !items.empty? && counted_weeks > items.keys[0].to_i
       weeks += 1
     end
 
